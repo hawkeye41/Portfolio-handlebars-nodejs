@@ -6,14 +6,14 @@ const nodemailer = require('nodemailer');
 
 const app = express();
 
-// View engine setup
+
 app.engine('handlebars', exphbs());
 app.set('view engine', 'handlebars');
 app.locals.layout = false; 
-// Static folder
+
 app.use('/public', express.static(path.join(__dirname, 'public')));
 
-// Body Parser Middleware
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
