@@ -41,8 +41,8 @@ app.post('/send', (req, res) => {
     port: 587,
     secure: false, // true for 465, false for other ports
     auth: {
-        user: '2019kucp1085@iiitkota.ac.in', // generated ethereal user
-        pass: 'r6xcWtJgEwQFPIO5'  // generated ethereal password
+        user: 'process.env.AUTH_ID', // generated ethereal user
+        pass: 'process.env.AUTH_PASSWORD'  // generated ethereal password
     },
     tls:{
       rejectUnauthorized:false
@@ -52,7 +52,7 @@ app.post('/send', (req, res) => {
   // setup email data with unicode symbols
   let mailOptions = {
       from: '"Nodemailer Contact" <2019kucp1085@iiitkota.ac.in>', // sender address
-      to: 'meenasaurabh100@gmail.com', // list of receivers
+      to: 'process.env.RECEIVER_LIST_ID', // list of receivers
       subject: 'Node Contact Request', // Subject line
       text: 'Hello world?', // plain text body
       html: output // html body
