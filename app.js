@@ -46,11 +46,7 @@ app.post("/portfolio", (req,res)=>{
       }
   })
 });
-let port = process.env.PORT;
-if (port == null || port == ""){
-    port = 3000;
-}
-app.listen(port)
-app.listen(port, ()=>{
+
+app.listen(5000, ()=>{
     console.log("server started");
 })
