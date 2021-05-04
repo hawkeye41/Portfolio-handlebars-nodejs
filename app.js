@@ -1,73 +1,52 @@
+// require('dotenv').config();
+
 const express = require('express');
 const bodyParser = require('body-parser');
-const exphbs = require('express-handlebars');
+const ejs = require("ejs");
+const mongoose  = require('mongoose');
 const path = require('path');
-const nodemailer = require('nodemailer');
-
 const app = express();
-
-
-app.engine('handlebars', exphbs());
-app.set('view engine', 'handlebars');
-app.locals.layout = false; 
 
 app.use('/public', express.static(path.join(__dirname, 'public')));
 
-
-app.use(bodyParser.urlencoded({ extended: false }));
+app.set('view engine', 'ejs');
+app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
+mongoose.connect("mongodb://localhost:27017/portfolio",{  useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true });
+
+const userSchema= new mongoose.Schema({
+    name:String,
+    email:String,
+    phone:String,
+    message:String
+
+});
+
+const User = new mongoose.model("User", userSchema);
 
 app.get('/', (req, res) => {
   res.render('portfolio');
 });
 
-app.post('/send', (req, res) => {
-  const output = `
-    <p>You have a new contact request</p>
-    <h3>Contact Details</h3>
-    <ul>  
-      <li>Name: ${req.body.name}</li>
-      
-      <li>Email: ${req.body.email}</li>
-      <li>Phone: ${req.body.phone}</li>
-    </ul>
-    <h3>Message</h3>
-    <p>${req.body.message}</p>
-  `;
+app.post("/portfolio", (req,res)=>{
+    const newUser = new User({
+        name:req.body.name,
+        email:req.body.email,
+        phone:req.body.phone,
+        message:req.body.message
+    });
 
-  // create reusable transporter object using the default SMTP transport
-  let transporter = nodemailer.createTransport({
-    host: 'smtp-relay.sendinblue.com',
-    port: 587,
-    secure: false, // true for 465, false for other ports
-    auth: {
-        user: 'process.env.AUTH_ID', // generated ethereal user
-        pass: 'process.env.AUTH_PASSWORD'  // generated ethereal password
-    },
-    tls:{
-      rejectUnauthorized:false
-    }
-  });
-
-  // setup email data with unicode symbols
-  let mailOptions = {
-      from: '"Nodemailer Contact" <2019kucp1085@iiitkota.ac.in>', // sender address
-      to: 'process.env.RECEIVER_LIST_ID', // list of receivers
-      subject: 'Node Contact Request', // Subject line
-      text: 'Hello world?', // plain text body
-      html: output // html body
-  };
-
-  // send mail with defined transport object
-  transporter.sendMail(mailOptions, (error, info) => {
-      if (error) {
-          return console.log(error);
+  
+    newUser.save((err)=>{
+      if(err){
+          console.log(err);
+      }else{
+         
+          res.render("portfolio");
       }
-      console.log('Message sent: %s', info.messageId);   
-      console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+  })
+});
 
-      res.render('portfolio', {msg:'Email has been sent'});
-  });
-  });
-
-app.listen(process.env.PORT || 3000, () => console.log('Server started...'));
+app.listen(5000, ()=>{
+    console.log("server started at 5000");
+})

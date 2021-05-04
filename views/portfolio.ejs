@@ -205,9 +205,8 @@
     <div class="wrapper animated bounceInLeft">
       
       <div class="contact">
-        <h3>Email Us</h3>
-        {{msg}}
-        <form method="POST" action="send">
+        <h3>Email Us</h3>       
+        <form method="POST" action="/portfolio">
           <p>
             <label>Name<input type="text" name="name"></label></p>
          
@@ -224,7 +223,7 @@
             <textarea name="message" rows="3"></textarea>
           </p>
           <p class="full">
-            <button type="submit" onclick=alert({{msg}})>Submit</button>
+            <button type="submit">Submit</button>
           </p>
         </form>
       </div>
