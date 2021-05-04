@@ -47,6 +47,6 @@ app.post("/portfolio", (req,res)=>{
   })
 });
 
-app.listen(5000, ()=>{
-    console.log("server started at 5000");
+app.listen(3000, ()=>{
+    console.log("server started at 3000");
 })
