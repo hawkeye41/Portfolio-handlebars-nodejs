@@ -184,6 +184,7 @@ nav ul li a{
 
 
 /*********************************************skills********************/
+
 @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro);
 .snip1552 {
   font-family: 'Source Sans Pro', sans-serif;
@@ -192,15 +193,15 @@ nav ul li a{
   overflow: hidden;
   margin: 50px 20px;
   min-width: 230px;
-  max-width: 315px;
+  max-width: 290px;
   width: 100%;
   color: #000000;
   text-align: left;
   font-size: 16px;
   background-color: #fff;
-  border: 1px solid grey;
-  box-shadow: 2px 3px grey;
-
+  border-radius: 5%;
+  box-shadow: 5px 5px 5px 5px rgb(228, 220, 220);
+ 
 }
 
 .snip1552 * {
@@ -214,10 +215,15 @@ nav ul li a{
   vertical-align: top;
   max-width: 100%;
   backface-visibility: hidden;
-  width: 350px;
-  height: 200px;
+  width: 290px;
+  height: 240px;
 }
 
+.snip1552:hover{
+   background: rgb(42, 31, 31);
+    transition: all 0.5s;
+   transform: scale(1.2)  rotate(-5deg);
+}
 .snip1552 figcaption {
   position: absolute;
   top: 40px;
@@ -230,6 +236,7 @@ nav ul li a{
 
 .snip1552 h3,
 .snip1552 p {
+    color: white;
   margin: 0;
   opacity: 0;
   letter-spacing: 1px;
@@ -265,14 +272,15 @@ nav ul li a{
 .snip1552:hover > img,
 .snip1552.hover > img {
   opacity: 0.1;
+  transform: scale(1.5);
 }
 
 .snip1552:hover h3,
 .snip1552.hover h3,
 .snip1552:hover p,
 .snip1552.hover p {
-  -webkit-transform: translateY(0);
-  transform: translateY(0);
+ 
+  
   opacity: 1;
 }
 
@@ -284,6 +292,11 @@ nav ul li a{
 #skills p{
     text-align: center;
 
+}
+
+#code{
+    transform: translateX(25%);
+    width: 200px;
 }
 /**************************education *************/
 
